@@ -16,25 +16,44 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form'
+import fetchData from '@/lib/server-actions/fetch'
+import redirect from '@/lib/server-actions/redirect'
 
 export default function Registration() {
-	
+
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			username: '',
 			password: '',
-            email: '',
+			email: '',
 		},
 	})
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
-	
-		console.log(values)
+	async function onSubmit(values: z.infer<typeof formSchema>) {
+
+		let success = false;
+
+		try {
+			const res = await fetchData({
+				path: 'http://localhost:3005/api/v1/services/registration',
+				method: 'post',
+				data: values,
+				cache: 'no-store'
+			})
+
+			console.log(res)
+			if (res.error) throw res.data
+			success = true
+		} catch (err) {
+			console.log(err)
+		}
+		if (success) redirect('/signin')
+
 	}
 
 	return (
-		<Form {...form } >
+		<Form {...form} >
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
 				<FormField
 					control={form.control}
@@ -52,7 +71,7 @@ export default function Registration() {
 						</FormItem>
 					)}
 				/>
-                <FormField
+				<FormField
 					control={form.control}
 					name="password"
 					render={({ field }) => (
@@ -63,13 +82,13 @@ export default function Registration() {
 							</FormControl>
 							<FormDescription>
 								Type a password
-                            </FormDescription>
+							</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
 
-                <FormField
+				<FormField
 					control={form.control}
 					name="email"
 					render={({ field }) => (
@@ -80,7 +99,7 @@ export default function Registration() {
 							</FormControl>
 							<FormDescription>
 								Type your email
-                            </FormDescription>
+							</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}

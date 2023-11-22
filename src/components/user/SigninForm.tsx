@@ -41,6 +41,7 @@ export default function SigninForm() {
 				cache: 'no-store'
 			})
 
+			console.log(res)
 			if (res.error) throw res.data
 			setSessionCookie({data: res.data })
 			success = true

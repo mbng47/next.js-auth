@@ -2,7 +2,7 @@
 
 import { cookies } from 'next/headers'
 
-export default async function fetchData(
+export default async function setSessionCookie(
     { data }:
     { data: {
         token: string,
