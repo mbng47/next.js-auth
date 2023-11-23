@@ -59,13 +59,10 @@ export default function SigninForm() {
 					name="username"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Username</FormLabel>
+							<FormLabel>User</FormLabel>
 							<FormControl>
-								<Input placeholder="shadcn" {...field} />
+								<Input {...field} />
 							</FormControl>
-							<FormDescription>
-								This is your public display name.
-							</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -75,18 +72,15 @@ export default function SigninForm() {
 					name="password"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Password</FormLabel>
+							<FormLabel>Pass</FormLabel>
 							<FormControl>
 								<Input type='password' {...field} />
 							</FormControl>
-							<FormDescription>
-								Type a password
-                            </FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-				<Button type="submit">Submit</Button>
+				<Button variant="outline">Submit</Button>
 			</form>
 		</Form>
 	)

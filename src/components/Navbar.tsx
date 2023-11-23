@@ -13,7 +13,7 @@ const Navbar = () => {
 	const username = usernameObj?.value
 
 	return (
-		<nav className="sticky inset-x-0 top-0 z-30 h-14 backdrop-blur-lg transition-all">
+		<nav className="sticky inset-x-0 top-0 z-30 h-14">
 				<div className="flex px-20 h-14 items-center justify-between">
 					<Link href="/" className="z-40 flex font-semibold">
 					</Link>

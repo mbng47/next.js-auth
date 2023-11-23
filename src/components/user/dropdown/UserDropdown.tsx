@@ -15,7 +15,7 @@ export function UserDropdown({ username } : { username? : string }) {
     return (
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
-            <Button variant="outline">
+            <Button variant="link">
                 <span>{ username }</span>
             </Button>
         </DropdownMenuTrigger>

@@ -60,13 +60,10 @@ export default function Registration() {
 					name="username"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Username</FormLabel>
+							<FormLabel>User</FormLabel>
 							<FormControl>
-								<Input placeholder="shadcn" {...field} />
+								<Input {...field} />
 							</FormControl>
-							<FormDescription>
-								This is your public display name.
-							</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -76,13 +73,10 @@ export default function Registration() {
 					name="password"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Password</FormLabel>
+							<FormLabel>Pass</FormLabel>
 							<FormControl>
 								<Input type='password' {...field} />
 							</FormControl>
-							<FormDescription>
-								Type a password
-							</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -93,18 +87,15 @@ export default function Registration() {
 					name="email"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Email</FormLabel>
+							<FormLabel>E-mail</FormLabel>
 							<FormControl>
 								<Input type='email' {...field} />
 							</FormControl>
-							<FormDescription>
-								Type your email
-							</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-				<Button type="submit">Submit</Button>
+				<Button variant="outline">Submit</Button>
 			</form>
 		</Form>
 	)
