@@ -13,7 +13,7 @@ const fontSans = FontSans({
 
 export const metadata: Metadata = {
   title: 'Auth-app next.js',
-  description: 'Auth-app made in next.js',
+  description: 'Auth-app made in create next app',
 }
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={ true }>
       <body className={cn(
-					'grainy min-h-screen font-sans antialiased',
+					'grainy min-h-screen font-sans anitialised',
 					fontSans.className,
 				)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

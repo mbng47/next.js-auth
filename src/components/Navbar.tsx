@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { ModeToggle } from './theme/ThemeSwitch'
 import { buttonVariants } from './ui/button'
-import { ArrowRight } from 'lucide-react'
 import Conditional from '@/components/utils/ConditionalRendering'
 import { cookies } from 'next/headers'
 import { UserDropdown } from '@/components/user/dropdown/UserDropdown'
@@ -45,7 +44,7 @@ const Navbar = () => {
 						</div>
 					</Conditional>
 					<Conditional showWhen={ willShow }>
-						<div>Hi Master <UserDropdown username={ username } /></div>
+						<div><UserDropdown username={ username } /></div>
 					</Conditional>
 				</div>
 		</nav>
