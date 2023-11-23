@@ -14,10 +14,9 @@ const Navbar = () => {
 	const username = usernameObj?.value
 
 	return (
-		<nav className="sticky inset-x-0 top-0 z-30 h-14 border-b border-gray-200 backdrop-blur-lg transition-all">
-				<div className="flex px-20 h-14 items-center justify-between border-b border-zinc-200">
+		<nav className="sticky inset-x-0 top-0 z-30 h-14 backdrop-blur-lg transition-all">
+				<div className="flex px-20 h-14 items-center justify-between">
 					<Link href="/" className="z-40 flex font-semibold">
-						<span>@guiDog</span>
 					</Link>
 					<Conditional showWhen={ !willShow }>
 					<div className="hidden items-center space-x-4 sm:flex">
@@ -25,20 +24,22 @@ const Navbar = () => {
 								<ModeToggle />
 								<Link
 									className={buttonVariants({
-										variant: 'ghost',
+										variant: 'link',
 										size: 'sm',
 									})}
 									href="/signin"
 								>
 									Sign in
 								</Link>
+								<h2>|</h2>
 								<Link
 									className={buttonVariants({
+										variant: 'link',
 										size: 'sm',
 									})}
 									href="/registration"
 								>
-									Get Started <ArrowRight className="ml-1.5 h-5 w-5" />
+									Register
 								</Link>
 							</>
 						</div>
