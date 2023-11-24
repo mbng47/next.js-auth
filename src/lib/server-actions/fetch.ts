@@ -21,11 +21,9 @@ export default async function fetchData(
         });
 
         const res = await response.json()
-        console.log(res)
 
-        if (res.error) throw new Error(res.data)
+        // if (res.error) throw new Error(res.data)
 
-        // console.log(res)
 
-        return res.data
+        return res
     }   

@@ -1,5 +1,5 @@
 'use client'
-
+import React from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -7,6 +7,7 @@ import formSchema from '@/lib/validations/user/user-signin-form'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import redirect from '@/lib/server-actions/redirect'
+import Callout from '../utils/callout'
 
 import setSessionCookie from '@/lib/server-actions/set-session-cookie'
 
@@ -22,6 +23,8 @@ import {
 import fetch from '@/lib/server-actions/fetch'
 
 export default function SigninForm() {
+	const [alert, setAlert] = React.useState<{ error: boolean, message: string }>({ error: false, message: '' });
+
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -41,18 +44,27 @@ export default function SigninForm() {
 				cache: 'no-store'
 			})
 
-			console.log(res)
-			if (res.error) throw res.data
-			setSessionCookie({data: res.data })
+			if (res.err > 0) {
+				console.log(res)
+				setAlert({ error: true, message: res.data });
+				return
+			}
+			
+			setSessionCookie({ data: res.data })
 			success = true
+
+
 		} catch (err) {
 			console.log(err)
+			throw err
 		}
 		if (success) redirect('/dashboard')
 	}
 
+	const { error } = alert;
 	return (
-		<Form {...form } >
+		<Form {...form} >
+			{error && <Callout alert={alert} />}
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
 				<FormField
 					control={form.control}
@@ -67,7 +79,7 @@ export default function SigninForm() {
 						</FormItem>
 					)}
 				/>
-                <FormField
+				<FormField
 					control={form.control}
 					name="password"
 					render={({ field }) => (

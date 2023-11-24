@@ -1,5 +1,5 @@
 'use client'
-
+import React from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -18,9 +18,10 @@ import {
 } from '@/components/ui/form'
 import fetchData from '@/lib/server-actions/fetch'
 import redirect from '@/lib/server-actions/redirect'
+import Callout from '../utils/callout'
 
 export default function Registration() {
-
+	const [alert, setAlert] = React.useState<{ error: boolean, message: string }>({ error: false, message: '' });
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -42,9 +43,14 @@ export default function Registration() {
 				cache: 'no-store'
 			})
 
-			console.log(res)
-			if (res.error) throw res.data
-			success = true
+
+			console.log(res);
+			if (res.err > 0) {
+				console.log(res)
+				setAlert({ error: true, message: res.data });
+				return
+			}
+			// success = true
 		} catch (err) {
 			console.log(err)
 		}
@@ -52,8 +58,10 @@ export default function Registration() {
 
 	}
 
+	const { error } = alert;
 	return (
 		<Form {...form} >
+			{error && <Callout alert={alert} />}
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
 				<FormField
 					control={form.control}
